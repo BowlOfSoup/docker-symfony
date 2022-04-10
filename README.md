@@ -15,7 +15,7 @@ git clone https://github.com/BowlOfSoup/docker-symfony.git YOUR_APP_DIR
 cp .env.default .env
 ```
 
-3. Edit your .env file. Choose unique names, and ports (e.g. `APP_PORT=8091` and `DB_PORT=33061`)
+3. Edit your `.env` file. Choose unique names, and ports (e.g. `APP_PORT=8091` and `DB_PORT=33061`)
 
 
 4. Run the following commands to build and run the containers:
