@@ -1,0 +1,49 @@
+version: '3.9'
+
+networks:
+  docker-symfony-network:
+
+services:
+  server:
+    build:
+      context: ""
+      dockerfile: docker/server/Dockerfile
+    container_name: '${APP_NAME}-server'
+    ports:
+      - '${APP_PORT}:80'
+    working_dir: /var/www
+    environment:
+      - 'DATABASE_URL=mysql://root:root@db_server:3306/${MYSQL_DB}?serverVersion=10.5'
+    volumes:
+      - ./app:/var/www
+      - ./docker/server/apache/sites-enabled:/etc/apache2/sites-enabled
+      - ./docker/server/php/php.ini:/usr/local/etc/php/conf.d/extra-php-config.ini
+    depends_on:
+      db_server:
+        condition: service_healthy
+    networks:
+      - docker-symfony-network
+
+  db_server:
+    image: mariadb:10.5.9
+    container_name: '${APP_NAME}-db'
+    restart: always
+    ports:
+      - '${DB_PORT}:3306'
+    environment:
+      MYSQL_ROOT_PASSWORD: 'root'
+      MYSQL_USER: 'root'
+      MYSQL_PASSWORD: 'root'
+      MYSQL_DATABASE: '${MYSQL_DB}'
+    volumes:
+      - db_data:/var/lib/mysql
+      - ./docker/db/mariadb/my.cnf:/etc/mysql/conf.d/my.cnf
+    healthcheck:
+      test: mysqladmin ping -h 127.0.0.1 -u root --password=root
+      interval: 5s
+      retries: 10
+    networks:
+      - docker-symfony-network
+
+volumes:
+  db_data:
