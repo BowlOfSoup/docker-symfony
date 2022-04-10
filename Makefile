@@ -25,3 +25,6 @@ console: ## Execute symfony commands (e.g. make console args="migrations:migrate
 
 symfony: ## Execute symfony commands (e.g. make console args="new --dir=app --no-git")
 	docker-compose exec server symfony ${args}
+
+composer: ## Support for composer commands (e.g. make composer args="install")
+	docker-compose exec server composer ${args}

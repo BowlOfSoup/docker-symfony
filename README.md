@@ -40,7 +40,8 @@ make sh
 mkdir app
 make sh
 
-symfony new --dir=app --no-git
+cd ../
+symfony new --dir=www --no-git
 ```
 
 Usage of the `app` directory is mandatory, it's how the Docker containers are configured.
@@ -61,9 +62,19 @@ If you want to use the project including this Docker setup within your own versi
 rm -rf .git
 ```
 
-### Symfony commands
-The usage of `bin/console` can be done inside the container. For convenience, I've added a make command:
+### Composer, Symfony and console commands
 
+Composer commands:
 ```
-make symfony args="new --dir=app --no-git"
+make composer args="install"
+```
+
+Symfony commands:
+```
+make symfony args="new --dir=/../www --no-git"
+```
+
+(Symfony) Console commands:
+```
+make console args="migrations:migrate"
 ```
