@@ -19,3 +19,9 @@ down: ## Down all containers
 
 sh: ## Open a shell into the server
 	docker-compose exec server bash
+
+console: ## Execute symfony commands (e.g. make console args="migrations:migrate")
+	docker-compose exec server bin/console ${args}
+
+symfony: ## Execute symfony commands (e.g. make console args="new --dir=app --no-git")
+	docker-compose exec server symfony ${args}
