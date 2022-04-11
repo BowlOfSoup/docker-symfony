@@ -12,6 +12,6 @@ RUN install-php-extensions gd pdo_mysql bcmath zip intl opcache
 COPY --from=composer:2.0 /usr/bin/composer /usr/local/bin/composer
 RUN composer self-update --2
 
-RUN echo 'deb [trusted=yes] https://repo.symfony.com/apt/ /' | tee /etc/apt/sources.list.d/symfony-cli.list \
-    apt update \
+RUN echo 'deb [trusted=yes] https://repo.symfony.com/apt/ /' | tee /etc/apt/sources.list.d/symfony-cli.list && \
+    apt update && \
     apt install symfony-cli
