@@ -28,3 +28,9 @@ symfony: ## Execute symfony commands (e.g. make console args="new --dir=app --no
 
 composer: ## Support for composer commands (e.g. make composer args="install")
 	docker-compose exec server composer ${args}
+
+xdebug.enable: ## Recreates the php container with xdebug enabled
+	ENABLE_XDEBUG=true docker-compose up -d server
+
+xdebug.disable: ## Recreates the php container with xdebug disabled. Let make up do this ;)
+	make up

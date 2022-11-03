@@ -5,15 +5,14 @@ networks:
 
 services:
   server:
-    build:
-      context: ""
-      dockerfile: docker/server/Dockerfile
+    build: docker/server
     container_name: '${APP_NAME}-server'
     ports:
       - '${APP_PORT}:80'
     working_dir: /var/www
     environment:
-      - 'DATABASE_URL=mysql://root:root@db_server:3306/${MYSQL_DB}?serverVersion=10.5'
+      DATABASE_URL: 'mysql://root:root@db_server:3306/${MYSQL_DB}?serverVersion=10.5'
+      ENABLE_XDEBUG: ${ENABLE_XDEBUG:-false}
     volumes:
       - ./app:/var/www
       - ./docker/server/apache/sites-enabled:/etc/apache2/sites-enabled
