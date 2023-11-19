@@ -24,14 +24,12 @@ services:
       - docker-symfony-network
 
   db_server:
-    image: mariadb:10.5.9
+    image: mariadb:10.11.5
     container_name: '${APP_NAME}-db'
     ports:
       - '${DB_PORT}:3306'
     environment:
       MYSQL_ROOT_PASSWORD: 'root'
-      MYSQL_USER: 'root'
-      MYSQL_PASSWORD: 'root'
       MYSQL_DATABASE: '${MYSQL_DB}'
     volumes:
       - db_data:/var/lib/mysql

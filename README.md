@@ -1,5 +1,5 @@
 # docker-symfony
-A simple Docker setup that can run Symfony 6. Uses `php8.1-apache-buster` and `mariadb:10.5.9`.
+A simple Docker setup that can run Symfony 6. Uses `php8.1-apache-buster` and `mariadb:10.11.5`.
 
 ### How to use
 
